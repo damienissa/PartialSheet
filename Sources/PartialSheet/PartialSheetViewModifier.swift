@@ -15,7 +15,7 @@ struct PartialSheet<SheetContent>: ViewModifier where SheetContent: View {
     
     /// Tells if the sheet should be presented or not
     @Binding var presented: Bool
-    @Binding var flag: Bool
+    @State var flag: Bool
     
     /// The color of the background
     var backgroundColor: Color

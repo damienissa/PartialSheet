@@ -22,7 +22,7 @@ extension View {
 	*/
 	public func partialSheet<SheetContent: View>(
 		presented: Binding<Bool>,
-        enabledDrag: Binding<Bool>,
+        enabledDrag: Bool,
 		backgroundColor: Color = Color.white,
 		handlerBarColor: Color = Color.gray,
 		enableCover: Bool = true,
