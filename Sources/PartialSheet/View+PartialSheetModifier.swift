@@ -20,9 +20,10 @@ extension View {
 	- parameter coverColor: The background color for the Cover View. Default is *Color.black.opacity(0.2)*.
 	- parameter view: The content to place inside of the Partial Sheet.
 	*/
-	public func partialSheet<SheetContent: View>(
+    public func partialSheet<SheetContent: View, BGView: View>(
 		presented: Binding<Bool>,
         enabledDrag: Bool,
+        viewForGesture: BGView,
 		backgroundColor: Color = Color.white,
 		handlerBarColor: Color = Color.gray,
 		enableCover: Bool = true,
@@ -31,7 +32,7 @@ extension View {
 		self.modifier(
 			PartialSheet(
                 presented: presented,
-                flag: enabledDrag,
+                flag: enabledDrag, viewForGesture: viewForGesture,
 				backgroundColor: backgroundColor,
 				handlerBarColor: handlerBarColor,
 				enableCover: enableCover,

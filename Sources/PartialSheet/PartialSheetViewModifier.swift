@@ -9,13 +9,14 @@
 import SwiftUI
 
 /// This is the modifier for the Partial Sheet
-struct PartialSheet<SheetContent>: ViewModifier where SheetContent: View {
+struct PartialSheet<SheetContent, GestureView: View>: ViewModifier where SheetContent: View {
     
     // MARK: - Public Properties
     
     /// Tells if the sheet should be presented or not
     @Binding var presented: Bool
     @State var flag: Bool
+    @State var viewForGesture: GestureView
     
     /// The color of the background
     var backgroundColor: Color
@@ -156,8 +157,11 @@ struct PartialSheet<SheetContent>: ViewModifier where SheetContent: View {
                     }
                     .frame(height: handlerSectionHeight)
                     VStack {
-                        // Attach the content of the sheet
-                        self.view()
+                        
+                        ZStack {
+                            viewForGesture.gesture(drag)
+                            self.view()
+                        }
                             
                         .background(
                             GeometryReader { proxy -> AnyView in
@@ -183,7 +187,7 @@ struct PartialSheet<SheetContent>: ViewModifier where SheetContent: View {
                 )
                     .animation(self.dragState.isDragging ?
                         nil : .interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
-                    .gesture(flag ? drag : nil)
+//                    .gesture(flag ? drag : nil)
             }
         }
     }
