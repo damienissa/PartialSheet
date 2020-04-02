@@ -15,6 +15,7 @@ struct PartialSheet<SheetContent>: ViewModifier where SheetContent: View {
     
     /// Tells if the sheet should be presented or not
     @Binding var presented: Bool
+    @Binding var flag: Bool
     
     /// The color of the background
     var backgroundColor: Color
@@ -182,7 +183,7 @@ struct PartialSheet<SheetContent>: ViewModifier where SheetContent: View {
                 )
                     .animation(self.dragState.isDragging ?
                         nil : .interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
-                    .gesture(drag)
+                    .gesture(flag ? drag : nil)
             }
         }
     }

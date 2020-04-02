@@ -22,6 +22,7 @@ extension View {
 	*/
 	public func partialSheet<SheetContent: View>(
 		presented: Binding<Bool>,
+        enabledDrag: Binding<Bool>,
 		backgroundColor: Color = Color.white,
 		handlerBarColor: Color = Color.gray,
 		enableCover: Bool = true,
@@ -29,7 +30,8 @@ extension View {
 		view: @escaping () -> SheetContent ) -> some View {
 		self.modifier(
 			PartialSheet(
-				presented: presented,
+                presented: presented,
+                flag: enabledDrag,
 				backgroundColor: backgroundColor,
 				handlerBarColor: handlerBarColor,
 				enableCover: enableCover,
